@@ -1,0 +1,13 @@
+form {
+  background-color: inherit;
+  color: black;
+}
+
+input,
+textarea {
+  background-color: grey;
+}
+
+label {
+  background-color: cornflowerblue;
+}

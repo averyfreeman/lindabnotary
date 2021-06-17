@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "checkJs": false,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "target": "es2020",
+    "module": "es2015",
+    "baseUrl": "src",
+    "paths": {
+      "assets/*": ["src/assets/*"],
+      "components/*": ["src/components/*"],
+      "hooks/*": ["srchooks/*"],
+      "lib/*": ["src/lib/*"],
+      "pages/*": ["src/pages/*"],
+      "styles/*": ["src/styles/*"],
+      "util/*": ["src/util/*"]
+    },
+    "experimentalDecorators": true,
+    "syntheticImports": true
+  },
+  "exclude": [
+    "dist",
+    "node_modules",
+    "build",
+    ".vscode",
+    "coverage",
+    ".npm",
+    ".yarn"
+  ],
+  "typeAcquisition": {
+    "enable": true,
+    "include": ["react", "react-dom", "jest", "testing-library__jest-dom"]
+  }
+}

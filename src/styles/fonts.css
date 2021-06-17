@@ -1,0 +1,93 @@
+@font-face {
+  font-family: 'Acme';
+  font-weight: 400;
+  src: url('./fonts/Acme-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Architects Daughter';
+  font-weight: 400;
+  src: url('./fonts/ArchitectsDaughter-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Carter One';
+  font-weight: 400;
+  src: url('./fonts/CarterOne-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Courier Prime';
+  font-weight: 400;
+  src: url('./fonts/CourierPrime-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Days One';
+  font-weight: 400;
+  src: url('./fonts/DaysOne-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Great Vibes';
+  font-weight: 400;
+  src: url('./fonts/GreatVibes-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Josefin Sans';
+  font-weight: 400;
+  src: url('./fonts/JosefinSans-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Righteous';
+  font-weight: 800;
+  src: url('./fonts/Righteous-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-weight: 400;
+  src: url('./fonts/Ubuntu-Regular.ttf');
+}
+
+.acme {
+  font-family: 'Acme', sans-serif;
+}
+
+.architects-daughter {
+  font-family: 'Architects Daughter', cursive;
+}
+
+.courier {
+  font-family: 'Courier Prime', Courier New, Menlo, Monaco, Lucida Console,
+    Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, monospace;
+  font-size: 1.6rem;
+}
+
+.cursive {
+  font-family: 'Great Vibes', cursive;
+}
+
+.carter-one {
+  font-family: 'Carter One', 'Righteous';
+}
+
+.days-one {
+  font-family: 'Days One', sans-serif;
+}
+
+.josefin-sans {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.righteous {
+  font-family: 'Righteous', sans-serif;
+}
+
+.ubuntu {
+  font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Lucidia Sans', 'Cantarell', 'Open Sans', 'Helvetica Neue',
+    sans-serif, Helvetica, sans-serif;
+}
