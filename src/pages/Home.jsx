@@ -12,10 +12,10 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
-import { ThreeDots } from 'react-loading-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
+import LoadingAnim from '../components/LoadingAnim';
 import PageChangeAnimator from '../components/PageChangeAnimator';
 import HomeBanner from '../pageElements/HomeBanner';
 import HomeCards from '../pageComponents/HomeCards';
@@ -23,8 +23,6 @@ import StarRatings from '../components/StarRatings';
 import TagLine from '../components/TagLine';
 import RequestArrow from '../pageElements/RequestArrow';
 import Footer from '../pageElements/Footer';
-
-console.log(process.env.NODE_ENV);
 
 const questionIcon = <FontAwesomeIcon icon={faQuestionCircle} size="2x" />;
 
@@ -57,7 +55,12 @@ function ExternalLinkToast() {
                   Loading article from LegalZoom
                 </Heading>
                 <Box>
-                  <ThreeDots stroke="black" fill="darkgreen" />
+                  <LoadingAnim
+                    stroke="green"
+                    strokeWidth="1px"
+                    fill="darkgreen"
+                  />
+                  {/* <ThreeDots stroke="black" fill="darkgreen" /> */}
                 </Box>
                 <Text>This window will remain open</Text>
               </Box>
@@ -176,17 +179,12 @@ const Home = () => {
 
           <Box label="spacer" height="4rem" minW="100%" opacity="0" />
 
-          <RequestArrow
-            alignSelf="flex-end"
-            bg={bgColor}
-            borderRadius="lg"
-            className="carter-one"
-            m={5}
-            p={3}
-            position="relative"
-            right={100}
-          >
-            Quote Request Button
+          <RequestArrow className="carter-one" m={5} p={3}>
+            If you have any questions, please visit{' '}
+            <Box as="span" color="#1d6eb9">
+              <Link to="/contact">my contact page</Link>
+            </Box>{' '}
+            or use the Quote Request Button
           </RequestArrow>
         </VStack>
         <Footer />

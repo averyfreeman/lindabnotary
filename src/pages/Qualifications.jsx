@@ -1,6 +1,6 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Box, Container, Flex, Image, Stack } from '@chakra-ui/react';
+import { Link, useLocation } from 'react-router-dom';
+import { Box, Container, Image, Stack } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhoneVolume } from '@fortawesome/free-solid-svg-icons';
 import ImageExpanderModal from 'components/ImageExpanderModal';
@@ -101,8 +101,8 @@ const Qualifications = props => {
                 borderRadius="lg"
                 objectFit="contain"
                 m={2}
-                src="/nna-pledge.png"
-                fallbackSrc="/nna-pledge.jpg"
+                src="/notary-pledge-frompdf.webp"
+                fallbackSrc="/nna-pledge.png"
               />
             </ImageExpanderModal>
           </Container>
@@ -176,7 +176,13 @@ const Qualifications = props => {
           </Container>
           <LightDivider />
           <Box label="spacer" height="2rem" minW="100%" opacity="0" />
-          <RequestArrow p={3} iconRotate={20} />
+          <RequestArrow className="carter-one" m={5} p={3}>
+            If you have any questions, please visit{' '}
+            <Box as="span" color="#1d6eb9">
+              <Link to="/contact">my contact page</Link>
+            </Box>{' '}
+            or use the Quote Request Button
+          </RequestArrow>
         </Paper>
         <Footer />
       </BackdropSpacing>

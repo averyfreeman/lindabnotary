@@ -2,7 +2,9 @@
 import React from 'react';
 import { Box, IconButton, Tooltip, useDisclosure } from '@chakra-ui/react';
 import ESign from '../assets/ESign2';
-import QuoteModal from '../pageComponents/QuoteModal';
+import MultiModal from '../pageComponents/MultiModal';
+import QuoteRequestForm from '../pageComponents/QuoteRequestForm';
+import QuoteRequestHeader from '../pageElements/QuoteRequestHeader';
 
 const QuoteButton = props => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -11,7 +13,7 @@ const QuoteButton = props => {
 
   return (
     <Box>
-      <QuoteModal isOpen={isOpen} onClose={onClose} />
+      {/* <QuoteModal isOpen={isOpen} onClose={onClose} /> */}
       <Box
         border="3px solid black"
         borderRadius="full"
@@ -28,6 +30,17 @@ const QuoteButton = props => {
           transform: 'scale(1.03)',
         }}
       >
+        {isOpen && (
+          <MultiModal
+            isOpen={isOpen}
+            onClose={onClose}
+            header={<QuoteRequestHeader />}
+            footer={`Thanks for contacting me!`}
+          >
+            <QuoteRequestForm />
+          </MultiModal>
+        )}
+
         <Tooltip
           hasArrow
           aria-label="request a quote"

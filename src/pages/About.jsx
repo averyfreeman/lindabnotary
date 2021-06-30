@@ -1,6 +1,6 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Box, Flex, Image, Text, useColorModeValue } from '@chakra-ui/react';
+import { Link, useLocation } from 'react-router-dom';
+import { Box, Flex, Image, Text } from '@chakra-ui/react';
 
 import { randomFont } from '../lib/randomFont';
 import PageChangeAnimator from '../components/PageChangeAnimator';
@@ -16,8 +16,6 @@ import RequestArrow from '../pageElements/RequestArrow';
 import SecondaryHeader from '../pageElements/SecondaryHeader';
 
 const About = props => {
-  const bgColor = useColorModeValue('gray.200', 'gray.800');
-
   /* eslint-disable no-unused-vars */
   let location = useLocation();
   return (
@@ -174,17 +172,12 @@ const About = props => {
             minW="100%"
             opacity="0"
           />
-          <RequestArrow
-            align="center"
-            bg={bgColor}
-            borderRadius="lg"
-            className="carter-one"
-            iconRotate={90}
-            justify="flex-end"
-            m={5}
-            p={3}
-          >
-            Or use the Quote Request Button
+          <RequestArrow className="carter-one" m={5} p={3}>
+            If you have any questions, please visit{' '}
+            <Box as="span" color="#1d6eb9">
+              <Link to="/contact">my contact page</Link>
+            </Box>{' '}
+            or use the Quote Request Button
           </RequestArrow>
         </Paper>
         <Footer />

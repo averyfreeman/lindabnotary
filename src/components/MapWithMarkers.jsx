@@ -9,7 +9,7 @@ const mapParams = {
     lng: -122.84,
   },
   zoom: 8,
-  scrollwheel: false,
+  scrollwheel: true,
   zoomControl: true,
   title: 'Service Area',
 };
@@ -41,7 +41,7 @@ const points = {
   },
 };
 
-const MapWithMarkers = () => {
+const MapWithMarkers = React.memo(Map => {
   const { ref, map, google } = useGoogleMaps(API_KEY, {
     center: mapParams.center,
     zoom: mapParams.zoom,
@@ -50,20 +50,26 @@ const MapWithMarkers = () => {
     title: mapParams.title,
   });
 
+  let cityMarkers = [];
   if (map) {
     const cityNames = Object.keys(points);
     const cityCoords = Object.values(points);
-    cityNames.forEach(
-      (city, i) =>
+    {
+
+      cityNames.map((city, i) => {
         new google.maps.Marker({
           position: cityCoords[i],
           title: cityNames[i],
           map,
-        }),
-    );
+        });
+      }), ...cityMarkers
+    }
   }
-
+  // return cityMarkers;
+  // setInterval(() => {
+  // console.log(cityMarkers);
+  // }, 3000);
   return <Box as="div" ref={ref} style={{ height: '80vh', width: '90vw' }} />;
-};
+});
 
 export default MapWithMarkers;

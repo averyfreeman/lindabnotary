@@ -21,12 +21,13 @@ const FadeScaleYWrapper = ({ children, duration, key, ...rest }) => {
         // otherprop
       }}
       transition={{
-        duration: duration,
-        ease: 'easeInOut',
+        duration: 0.3,
+        ease: 'ease',
         opacity: 1,
         scaleY: 1,
         type: 'tween',
       }}
+      {...rest}
     >
       {children}
     </motion.div>

@@ -8,7 +8,6 @@ const usePageViews = () => {
 
   useEffect(() => {
     setCurrentLocation(location);
-    console.log(location);
   }, [location]);
 
   return currentLocation;

@@ -3,6 +3,8 @@ import { Box, Text } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
+// 6-18-2021 - note: this component is not finished - contains dummy values (very misleading, but looks cool...)
+// todo: find a source for actual reviews, connect API or manually copy values
 const property = {
   reviewCount: 34,
   rating: 5,

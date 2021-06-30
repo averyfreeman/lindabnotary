@@ -1,155 +1,217 @@
 import './styles/global.css';
-import React, {
-  Fragment,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { Fragment, lazy, Suspense, useMemo } from 'react';
 import { Box, ChakraProvider, ColorModeScript, theme } from '@chakra-ui/react';
-import {
-  Route,
-  Redirect,
-  Switch,
-  useLocation,
-  withRouter,
-} from 'react-router-dom';
-import DesignSystem from 'design-system-utils';
+import { Route, Redirect, Switch, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-
-// import { gaInit } from './lib/gaInit';
-import useScrollPosition from './hooks/useScrollPosition';
+import LoadingAnim from './components/LoadingAnim';
 import QuoteButton from './components/QuoteButton';
 import MenuDrawer from './pageComponents/MenuDrawer';
 import MenuHeader from './pageComponents/MenuHeader';
-import About from './pages/About';
-import Contact from './pages/Contact';
 import Home from './pages/Home';
-import Loading from './pages/Loading';
-import Qualifications from './pages/Qualifications';
-import Region from './pages/Region';
-import FormMailer from './pages/FormMailer';
-import FormScreen from './pages/FormScreen';
-// import FourOhFour from './pages/FourOhFour';
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Loading = lazy(() => import('./pages/Loading'));
+const Qualifications = lazy(() => import('./pages/Qualifications'));
+const Region = lazy(() => import('./pages/Region'));
 
-// gaInit();
-
-const systemD = new DesignSystem(theme);
-
-const PositionStore = () => {
-  const [renderCount, triggerReRender] = useState(0);
-  const elementPosition = useRef({ x: 10, y: 150 });
-  const viewportPosition = useRef({ x: 0, y: 0 });
-  let throttleTimeout = null;
-
-  const getPos = (el, axis) => Math.round(el.current[axis]);
-
-  const setPos = (el, pos) => {
-    el.current = pos;
-    if (throttleTimeout !== null) return;
-    // Only re-render the component every 0.1s
-    throttleTimeout = setTimeout(() => triggerReRender(renderCount + 1), 300);
-  };
-
-  return {
-    getElementX: () => getPos(elementPosition, 'x'),
-    getElementY: () => getPos(elementPosition, 'y'),
-    getViewportX: () => getPos(viewportPosition, 'x'),
-    getViewportY: () => getPos(viewportPosition, 'y'),
-    setElementPosition: pos => setPos(elementPosition, pos),
-    setViewportPosition: pos => setPos(viewportPosition, pos),
-    renderCount,
-  };
+const DevelopmentPortion = () => {
+  <Fragment>
+    <Route
+      path="/formiktest"
+      children={
+        <Suspense
+          fallback={
+            <LoadingAnim
+              stroke="blue"
+              strokeWidth="1px"
+              fill="cornflowerblue"
+            />
+          }
+        >
+          <FormikTest />
+        </Suspense>
+      }
+    />
+    <Route
+      path="/formmailer"
+      children={
+        <Suspense
+          fallback={
+            <LoadingAnim
+              stroke="blue"
+              strokeWidth="1px"
+              fill="cornflowerblue"
+            />
+          }
+        >
+          <FormMailer />
+        </Suspense>
+      }
+    />
+    <Route
+      path="/formscreen"
+      children={
+        <Suspense
+          fallback={
+            <LoadingAnim
+              stroke="blue"
+              strokeWidth="1px"
+              fill="cornflowerblue"
+            />
+          }
+        >
+          <FormScreen />
+        </Suspense>
+      }
+    />
+  </Fragment>;
 };
 
-const ScrollToTop = withRouter(({ children, location: { pathname } }) => {
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+const FormMailer = lazy(() => import('./pages/FormMailer'));
+const FormScreen = lazy(() => import('./pages/FormScreen'));
+const FormikTest = lazy(() => import('./pages/FormikTest'));
+// import About from './pages/About';
+// import Contact from './pages/Contact';
+// import Loading from './pages/Loading';
+// import Qualifications from './pages/Qualifications';
+// import Region from './pages/Region';
+// import FormMailer from './pages/FormMailer';
+// import FormScreen from './pages/FormScreen';
+// import FormikTest from './pages/FormikTest';
 
-  return children || null;
-});
-
-export default () => {
-  const positionStore = PositionStore();
-  const viewportRef = useRef();
-  const quoteButtonRef = useRef();
-
-  useScrollPosition(
-    ({ currPos }) => {
-      positionStore.setViewportPosition(currPos);
-      console.log(currPos.x, currPos.y);
-      // const { style } = viewportRef.current
-      // style.top = `${150 + currPos.y}px`
-      // style.left = `${10 + currPos.x}px`
-    },
-    [positionStore],
-    null,
-    true
-  );
-
+const App = () => {
   /* eslint-disable no-unused-vars */
   let location = useLocation();
-  return useMemo(() => (
-    <Fragment>
-      {console.log(systemD)}
-      <ColorModeScript />
-      <ChakraProvider theme={theme}>
-        <Box
-          // minH="100vh"
-          p={0}
-          as="main"
-          textAlign="center"
-          backgroundImage="url('/Real-estate-contract-signing.jpg')"
-          backgroundAttachment="fixed"
-          backgroundPosition="bottom"
-          backgroundRepeat="no-repeat"
-          backgroundSize="cover"
-        >
-          <Box display={{ base: 'flex', sm: 'none' }}>
-            <MenuDrawer justifySelf="flex-start" />
-          </Box>
-
+  return useMemo(
+    () => (
+      <Fragment>
+        <ColorModeScript />
+        <ChakraProvider theme={theme}>
           <Box
-            width="100vw"
-            boxShadow="4px 4px 8px black"
-            position="fixed"
-            top="0"
-            left="0"
-            display={{ base: 'none', sm: 'block' }}
+            // minH="100vh"
+            p={0}
+            as="main"
+            backgroundAttachment="fixed"
+            backgroundImage="url('/Real-estate-contract-signing.jpg')"
+            backgroundPosition="bottom"
+            backgroundRepeat="no-repeat"
+            backgroundSize="cover"
             textAlign="center"
-            zIndex="2"
           >
-            <MenuHeader />
-          </Box>
+            <Box display={{ base: 'flex', sm: 'none' }}>
+              <MenuDrawer justifySelf="flex-start" />
+            </Box>
 
-          <QuoteButton height={10} ref={quoteButtonRef} width={10} />
+            <Box
+              boxShadow="4px 4px 8px black"
+              display={{ base: 'none', sm: 'block' }}
+              left="0"
+              position="fixed"
+              textAlign="center"
+              top="0"
+              width="100vw"
+              zIndex="2"
+            >
+              <MenuHeader />
+            </Box>
 
-          <AnimatePresence exitBeforeEnter initial={false}>
-            <Switch location={location} key={location.pathname}>
-              <ScrollToTop>
+            <QuoteButton height={10} width={10} />
+
+            <AnimatePresence exitBeforeEnter initial={false}>
+              <Switch location={location} key={location.pathname}>
                 <Route path="/home" children={<Home />} />
-                <Route path="/about" children={<About />} />
-                <Route path="/region" children={<Region />} />
-                <Route path="/qualifications" children={<Qualifications />} />
-                <Route path="/contact" children={<Contact />} />
-                <Route path="/loading" children={<Loading />} />
                 <Route
-                  path="/formmailer"
-                  children={<FormMailer variable="email" />}
+                  path="/about"
+                  children={
+                    <Suspense
+                      fallback={
+                        <LoadingAnim
+                          stroke="blue"
+                          strokeWidth="1px"
+                          fill="cornflowerblue"
+                        />
+                      }
+                    >
+                      <About />
+                    </Suspense>
+                  }
                 />
                 <Route
-                  path="/formscreen"
-                  children={<FormScreen variable="email" />}
+                  path="/region"
+                  children={
+                    <Suspense
+                      fallback={
+                        <LoadingAnim
+                          stroke="green"
+                          strokeWidth="1px"
+                          fill="darkgreen"
+                        />
+                      }
+                    >
+                      <Region />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/qualifications"
+                  children={
+                    <Suspense
+                      fallback={
+                        <LoadingAnim
+                          stroke="lightorange"
+                          strokeWidth="1px"
+                          fill="orange"
+                        />
+                      }
+                    >
+                      <Qualifications />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/contact"
+                  children={
+                    <Suspense
+                      fallback={
+                        <LoadingAnim
+                          stroke="mediumpurple"
+                          strokeWidth="1px"
+                          fill="blueviolet"
+                        />
+                      }
+                    >
+                      <Contact />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/loading"
+                  children={
+                    <Suspense
+                      fallback={
+                        <LoadingAnim
+                          stroke="lightcoral"
+                          strokeWidth="1px"
+                          fill="indianred"
+                        />
+                      }
+                    >
+                      <Loading />
+                    </Suspense>
+                  }
                 />
                 <Route path="/" children={<Redirect to="/home" />} />
-              </ScrollToTop>
-            </Switch>
-          </AnimatePresence>
-        </Box>
-      </ChakraProvider>
-    </Fragment>
-  ));
+                {process.env.NODE_ENV === 'development' && (
+                  <DevelopmentPortion />
+                )}
+              </Switch>
+            </AnimatePresence>
+          </Box>
+        </ChakraProvider>
+      </Fragment>
+    ),
+    [location]
+  );
 };
 
-// export default App;
+export default App;

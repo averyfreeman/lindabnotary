@@ -1,26 +1,38 @@
-import React from 'react';
-import { Alert, AlertDescription } from '@chakra-ui/react';
+import React, { Fragment } from 'react';
+import { Alert, AlertDescription, CloseButton } from '@chakra-ui/react';
+import { AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FadeScaleYWrapper from './FadeScaleYWrapper';
 
 const OkAlert = props => {
   return (
-    <FadeScaleYWrapper duration={1} key={props.errorKey}>
-      <Alert
-        alignSelf={{ base: 'center', sm: 'flex-start' }}
-        borderRadius="lg"
-        minW="22rem"
-        my={2}
-        // maxW={{ base: '20rem', sm: '29.5rem' }}
-      >
-        <FontAwesomeIcon
-          color={props.iconColor}
-          icon={props.icon}
-          size={props.size}
-        />
-        <AlertDescription ml={3}>{props.desc || 'OK!'}</AlertDescription>
-      </Alert>
-    </FadeScaleYWrapper>
+    <Fragment>
+      <AnimatePresence key={props.errorKey}>
+        <FadeScaleYWrapper>
+          <Alert
+            // alignSelf={{ base: 'flex-start', sm: 'center' }}
+            borderRadius="lg"
+            fontSize={{ base: 'lg', md: 'xl' }}
+            // my={2}
+            // w={{ base: '18rem', md: '24rem' }}
+            {...props}
+          >
+            <FontAwesomeIcon
+              color={props.iconColor}
+              icon={props.icon}
+              size={props.size}
+            />
+            <AlertDescription ml={3}>{props.desc || 'OK!'}</AlertDescription>
+            <CloseButton
+              position="absolute"
+              right="8px"
+              top="8px"
+              onClick={props.handleIsVisible}
+            />
+          </Alert>
+        </FadeScaleYWrapper>
+      </AnimatePresence>
+    </Fragment>
   );
 };
 

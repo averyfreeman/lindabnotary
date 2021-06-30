@@ -6,18 +6,26 @@ const PageChangeAnimator = ({ children, duration, ...rest }) => {
     <motion.div
       initial={{
         opacity: 0,
+        // scaleX: 0.5,
+        // scaleX: 2,
+        x: '-30vw',
       }}
       animate={{
         opacity: 1,
+        scaleX: 1,
+        x: 0,
       }}
       exit={{
         opacity: 0,
+        // scaleX: 0.5,
+        // scaleX: 2,
+        x: '30vw',
       }}
       transition={{
         delayChildren: 1,
         duration: duration,
         // duration: 0.5,
-        ease: 'easeInOut',
+        ease: 'linear',
         staggerChildren: 0.2,
         type: 'tween',
       }}

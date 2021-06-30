@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
 
 import PageChangeAnimator from '../components/PageChangeAnimator';
-import BackdropSpacing from '../pageElements/BackdropSpacing';
 import ContactTable from '../pageComponents/ContactTable';
+import BackdropSpacing from '../pageElements/BackdropSpacing';
 import DarkDivider from '../pageElements/DarkDivider';
 import Footer from '../pageElements/Footer';
 import Header from '../pageElements/Header';
@@ -38,7 +38,6 @@ const About = () => {
             icon={faSun}
             size="6x"
             transform={{ rotate: 20 }}
-            // don't collapse
           />
 
           <SecondaryHeader>Contact Info</SecondaryHeader>
@@ -61,17 +60,8 @@ const About = () => {
           <DarkDivider />
           <Box label="spacer" height="4rem" minW="100%" opacity="0" />
 
-          <RequestArrow
-            align="center"
-            // bg={bgColor}
-            borderRadius="lg"
-            className="carter-one"
-            iconRotate={90}
-            justify="flex-end"
-            m={5}
-            p={3}
-          >
-            Or use the Quote Request Button
+          <RequestArrow className="carter-one" m={5} p={3}>
+            ...or use the Quote Request Button
           </RequestArrow>
         </Paper>
         <Footer />

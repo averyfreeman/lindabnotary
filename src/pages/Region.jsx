@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Box, Text } from '@chakra-ui/react';
 import PageChangeAnimator from '../components/PageChangeAnimator';
 import MapCanvas from '../pageComponents/MapCanvas';
@@ -40,7 +40,13 @@ const Region = () => {
             Based in Tacoma
           </Text>
           <Box label="spacer" height="4rem" minW="100%" opacity="0" />
-          <RequestArrow p={3} iconRotate={20} />
+          <RequestArrow className="carter-one" m={5} p={3}>
+            If you have any questions, please visit{' '}
+            <Box as="span" color="#1d6eb9">
+              <Link to="/contact">my contact page</Link>
+            </Box>{' '}
+            or use the Quote Request Button
+          </RequestArrow>
           <DarkDivider />
         </Paper>
         <Footer />

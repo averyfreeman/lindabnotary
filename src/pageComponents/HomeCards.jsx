@@ -41,25 +41,25 @@ const HomeCards = () => {
           title="About"
           desc="How Linda's notary services can help you"
           icon={stackIcon}
-          href="/pages/about"
+          href="/about"
         />
         <HomeCard
           title="Region"
           desc="Show a map of the area Linda serves"
           icon={mapIcon}
-          href="/pages/region"
+          href="/region"
         />
         <HomeCard
           title="Qualifications"
           desc="Linda's qualifications and memberships"
           icon={medalIcon}
-          href="/pages/qualifications"
+          href="/qualifications"
         />
         <HomeCard
           title="Contact"
           desc="Contact Linda for a quote or attestation"
           icon={phoneIcon}
-          href="/pages/contact"
+          href="/contact"
         />
       </SimpleGrid>
     </VStack>
