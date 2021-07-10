@@ -6,6 +6,7 @@ import { faPhoneVolume } from '@fortawesome/free-solid-svg-icons';
 import ImageExpanderModal from 'components/ImageExpanderModal';
 import PageButton from '../components/PageButton';
 import PageChangeAnimator from '../components/PageChangeAnimator';
+import OfferAlertModal from '../pageComponents/OfferAlertModal';
 import ExternalLinkButtons from '../pageComponents/ExternalLinkButtons';
 import InfoTable from '../pageComponents/InfoTable';
 import BackdropSpacing from '../pageElements/BackdropSpacing';
@@ -22,11 +23,17 @@ import CheckMark from '../assets/CheckMark';
 const colorProfile = 'blue';
 
 const Qualifications = props => {
+  const { offerModalDisplayed, setOfferModalDisplayed } = props;
   /* eslint-disable no-unused-vars */
   const location = useLocation();
   return (
     <PageChangeAnimator>
       <BackdropSpacing>
+        <OfferAlertModal
+          offerModalDisplayed={offerModalDisplayed}
+          setOfferModalDisplayed={setOfferModalDisplayed}
+        />
+
         <Paper className="spectral">
           <Header>Linda's Qualifications:</Header>
           <Box
@@ -51,11 +58,11 @@ const Qualifications = props => {
               fallbackSrc="/nna-certified.png"
               float="right"
               ml={5}
-              objectFit="containd"
+              objectFit="contained"
               src="/nna-cert-logo.webp"
             />
             I am a Certified Signing Agent, licensed in the State of Washington,
-            and also certified by the National Notary Association
+            and also certified by the National Notary Association.
           </Paragraph>
           <Box
             label="spacer"

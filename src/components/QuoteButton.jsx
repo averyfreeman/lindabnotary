@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { Box, IconButton, Tooltip, useDisclosure } from '@chakra-ui/react';
-import ESign from '../assets/ESign2';
-import MultiModal from '../pageComponents/MultiModal';
+import QuestionBubble from '../assets/vectors/QuestionBubble';
+import QuoteRequestModal from '../pageComponents/QuoteRequestModal';
 import QuoteRequestForm from '../pageComponents/QuoteRequestForm';
 import QuoteRequestHeader from '../pageElements/QuoteRequestHeader';
 
@@ -13,7 +13,6 @@ const QuoteButton = props => {
 
   return (
     <Box>
-      {/* <QuoteModal isOpen={isOpen} onClose={onClose} /> */}
       <Box
         border="3px solid black"
         borderRadius="full"
@@ -31,14 +30,15 @@ const QuoteButton = props => {
         }}
       >
         {isOpen && (
-          <MultiModal
+          <QuoteRequestModal
+            footer={`Thanks for contacting me!`}
+            header={<QuoteRequestHeader />}
             isOpen={isOpen}
             onClose={onClose}
-            header={<QuoteRequestHeader />}
-            footer={`Thanks for contacting me!`}
+            preserveScrollBarGap={true}
           >
             <QuoteRequestForm />
-          </MultiModal>
+          </QuoteRequestModal>
         )}
 
         <Tooltip
@@ -51,6 +51,11 @@ const QuoteButton = props => {
           fontSize={{ base: '1rem', md: '1.2rem' }}
           label="Request a quote!"
           placement="left-start"
+          sx={{
+            WebkitTextStrokeWidth: '0.2px',
+            WebkitTextStrokeColor: 'rgba(55, 55, 55, 1)',
+          }}
+          textShadow="1px 1px 3px black"
         >
           <IconButton
             aria-label="request a quote"
@@ -62,7 +67,8 @@ const QuoteButton = props => {
             width={`${outerWidth}px`}
             transform="inherit"
           >
-            <ESign height={props.height} width={props.width} />
+            <QuestionBubble height={props.height} width={props.width} />
+            {/* <ESign height={props.height} width={props.width} /> */}
           </IconButton>
         </Tooltip>
       </Box>

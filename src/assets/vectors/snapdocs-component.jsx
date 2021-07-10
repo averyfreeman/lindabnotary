@@ -7,7 +7,7 @@ const SdIcon = (...props) => {
       x="0px"
       y="0px"
       viewBox="-153 -46 652 652"
-      // style={{enable-background:new -153 -46 652 652;}}
+      enableBackground="new -153 -46 652 652"
       aria-hidden="true"
       role="img"
       {...props}

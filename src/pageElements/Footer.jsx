@@ -10,10 +10,11 @@ const copyString = `\u00A9 ${new Date().getFullYear()} `;
 const Footer = ({ bgColor, ...rest }) => (
   <Tooltip
     hasArrow
-    bg="rgba(231, 132, 33, 1)"
+    // bg="rgba(231, 132, 33, 1)"
+    bg="red.400"
     border="1px solid rgba(55, 30, 5, 1)"
     borderRadius="lg"
-    boxShadow="2px 2px 4px rgba(55, 30, 5, .70)"
+    // boxShadow="2px 2px 4px rgba(55, 30, 5, .70)"
     className="carter-one"
     color="white"
     fontWeight="bold"
@@ -25,10 +26,11 @@ const Footer = ({ bgColor, ...rest }) => (
       opacity: 1,
     }}
     sx={{
-      WebkitTextStrokeWidth: '1px',
-      WebkitTextStrokeColor: 'rgba(55, 55, 55, 1)',
+      WebkitTextStrokeWidth: '0.4px',
+      WebkitTextStrokeColor: 'black',
       transition: 'all 1s ease',
     }}
+    textShadow="1px 1px 3px black"
   >
     <Box
       as="a"

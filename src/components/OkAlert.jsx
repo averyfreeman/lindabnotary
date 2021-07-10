@@ -8,13 +8,10 @@ const OkAlert = props => {
   return (
     <Fragment>
       <AnimatePresence key={props.errorKey}>
-        <FadeScaleYWrapper>
+        <FadeScaleYWrapper duration={0.3}>
           <Alert
-            // alignSelf={{ base: 'flex-start', sm: 'center' }}
             borderRadius="lg"
             fontSize={{ base: 'lg', md: 'xl' }}
-            // my={2}
-            // w={{ base: '18rem', md: '24rem' }}
             {...props}
           >
             <FontAwesomeIcon

@@ -1,10 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Box, Stack } from '@chakra-ui/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { Box, Image, Stack } from '@chakra-ui/react';
 
 import PageChangeAnimator from '../components/PageChangeAnimator';
+import OfferAlertModal from '../pageComponents/OfferAlertModal';
 import ContactTable from '../pageComponents/ContactTable';
 import BackdropSpacing from '../pageElements/BackdropSpacing';
 import DarkDivider from '../pageElements/DarkDivider';
@@ -17,12 +16,18 @@ import SecondaryHeader from '../pageElements/SecondaryHeader';
 
 const colorProfile = 'blue';
 
-const About = () => {
+const About = props => {
+  const { offerModalDisplayed, setOfferModalDisplayed } = props;
   /* eslint-disable no-unused-vars */
   const location = useLocation();
   return (
     <PageChangeAnimator>
       <BackdropSpacing>
+        <OfferAlertModal
+          offerModalDisplayed={offerModalDisplayed}
+          setOfferModalDisplayed={setOfferModalDisplayed}
+        />
+
         <Paper>
           <Header>Contact Linda</Header>
           <Box
@@ -33,12 +38,9 @@ const About = () => {
           />
           <DarkDivider />
 
-          <FontAwesomeIcon
-            color="yellow"
-            icon={faSun}
-            size="6x"
-            transform={{ rotate: 20 }}
-          />
+          <Stack align="center" direction="column" flex={1} justify="center">
+            <Image height="60%" width="60%" src="/rotary-cell-phone.png" />
+          </Stack>
 
           <SecondaryHeader>Contact Info</SecondaryHeader>
           <LightDivider />

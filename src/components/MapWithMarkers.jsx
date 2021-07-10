@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { useGoogleMaps } from 'react-hook-google-maps';
-import { API_KEY } from '../data/gMapsKey.js';
+const API_KEY = process.env.REACT_APP_GMAPS_API_KEY;
 
 const mapParams = {
   center: {
@@ -50,25 +50,18 @@ const MapWithMarkers = React.memo(Map => {
     title: mapParams.title,
   });
 
-  let cityMarkers = [];
   if (map) {
     const cityNames = Object.keys(points);
     const cityCoords = Object.values(points);
-    {
-
-      cityNames.map((city, i) => {
-        new google.maps.Marker({
-          position: cityCoords[i],
-          title: cityNames[i],
-          map,
-        });
-      }), ...cityMarkers
-    }
+    cityNames.map((city, i) => {
+      new google.maps.Marker({
+        position: cityCoords[i],
+        title: cityNames[i],
+        map,
+      });
+      return map;
+    });
   }
-  // return cityMarkers;
-  // setInterval(() => {
-  // console.log(cityMarkers);
-  // }, 3000);
   return <Box as="div" ref={ref} style={{ height: '80vh', width: '90vw' }} />;
 });
 

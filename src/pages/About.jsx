@@ -5,6 +5,7 @@ import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import { randomFont } from '../lib/randomFont';
 import PageChangeAnimator from '../components/PageChangeAnimator';
 import AboutBottomButtons from '../pageComponents/AboutBottomButtons';
+import OfferAlertModal from '../pageComponents/OfferAlertModal';
 import BackdropSpacing from '../pageElements/BackdropSpacing';
 import DarkDivider from '../pageElements/DarkDivider';
 import Footer from '../pageElements/Footer';
@@ -16,11 +17,17 @@ import RequestArrow from '../pageElements/RequestArrow';
 import SecondaryHeader from '../pageElements/SecondaryHeader';
 
 const About = props => {
+  const { offerModalDisplayed, setOfferModalDisplayed } = props;
   /* eslint-disable no-unused-vars */
   let location = useLocation();
   return (
     <PageChangeAnimator>
       <BackdropSpacing>
+        <OfferAlertModal
+          offerModalDisplayed={offerModalDisplayed}
+          setOfferModalDisplayed={setOfferModalDisplayed}
+        />
+
         <Paper>
           <HeaderWHeadshot />
           <Box

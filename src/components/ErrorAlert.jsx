@@ -8,7 +8,7 @@ const ErrorAlert = props => {
   return (
     <Fragment>
       <AnimatePresence key={props.errorKey}>
-        <FadeScaleYWrapper>
+        <FadeScaleYWrapper duration={0.3}>
           <Alert
             borderRadius="lg"
             fontSize={{ base: 'lg', md: 'xl' }}

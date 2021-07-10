@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Box, Text } from '@chakra-ui/react';
 import PageChangeAnimator from '../components/PageChangeAnimator';
+import OfferAlertModal from '../pageComponents/OfferAlertModal';
 import MapCanvas from '../pageComponents/MapCanvas';
 import BackdropSpacing from '../pageElements/BackdropSpacing';
 import DarkDivider from '../pageElements/DarkDivider';
@@ -12,13 +13,19 @@ import Paper from '../pageElements/Paper';
 import Paragraph from '../pageElements/Paragraph';
 import RequestArrow from '../pageElements/RequestArrow';
 
-const Region = () => {
+const Region = props => {
+  const { offerModalDisplayed, setOfferModalDisplayed } = props;
   /* eslint-disable no-unused-vars */
   let location = useLocation();
 
   return (
     <PageChangeAnimator>
       <BackdropSpacing>
+        <OfferAlertModal
+          offerModalDisplayed={offerModalDisplayed}
+          setOfferModalDisplayed={setOfferModalDisplayed}
+        />
+
         <Paper>
           <Header>General Region</Header>
           <Box

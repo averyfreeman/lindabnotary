@@ -21,7 +21,7 @@ const FadeScaleYWrapper = ({ children, duration, key, ...rest }) => {
         // otherprop
       }}
       transition={{
-        duration: 0.3,
+        duration: duration,
         ease: 'ease',
         opacity: 1,
         scaleY: 1,

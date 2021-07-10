@@ -4,14 +4,39 @@
 
 This is a business profile site I created for a client who is a (wait for it) notary
 
-Obligatory "about me" type site w/ with navigation, a form mailer, responsive layout, service region map rendered through google maps, google analytics streams (of course).
+It's a simple obligatory "about me" type site, but I crammed in a decent number of features:
 
-Due to requirement scope, was able to implement almost entirely stateless functional design pattern, with a smattering of stateful methods (useState(), useFormik({})), memoization (useMemo()), and lifecycle methods (useEffect() and useLayoutEffect()); Emphasis on DRY / component reusability.
+- Responsive layout (Chakra UI + @emotion CSS-in-JS) - most pages / components have at 5 different sizes
+- Lightly animated navigation (React Router v5 + Framer Motion)
+- Dark mode (user selected, but system detection can be easily implemented)
+- Email form using Formik
+- Yup validation (with fun, animated feedback)
+- FormData POST w/ fetch (PHP mail backend)
+- Service region map (Google maps)
+- Modal dialogs for all the (appropriate) things...
 
-Intentionally obscured code in content-focused components (pages) by creating self-contained layout elements (pageElements), and larger component-sections of pages requiring considerable syntactical granularity (pageComponents), and single, reusable items (components), in an effort to maintain a codebase that's easy to understand and extend.
+Primarily stateless functional design pattern. Emphasis on DRY / component reusability. Attempted to be as idiomatic as possible. Created with scaling and collaboration among multiple experience levels in mind.
 
-Was able to integrate some fun new libraries, such as Chakra-UI + Styled-System (which additionally requres @emotion), Framer-Motion + react-router-dom (for implementing animated page transitions) Formik + Yup, creating POST to PHP sendmail script, Storybook (storybook repo coming soon) . . .
+Site is organized as follows:
 
-Will soon add code-splitting, tracking scroll to experiment with position-dependent child render props, and (possibly) some facebook integration (pixel, comment section).
+- pages: Intended to be primarily content-focused, almost all code is obscured
+- pageComponents: Largest sections of pages that require some syntactical granularity
+- pageElements: Smaller sections of pages that require some syntactical granularity
+- components: Single, reusable items
 
-Will likely create another repo w/ Snowpack version soon, have been developing in parallel...
+Recently added features:
+
+- Email form modal and backend
+- Discount offer modal (delayed 1 min)
+
+  Performance revisions:
+
+- Code-splitting
+- Memoization
+
+On the horizon (in order of importance):
+
+- Site analytics (Google)
+- Unit tests
+- Snowpack version (have been developing in parallel - reason for relative paths)
+- Storybook for components I'm most proud of

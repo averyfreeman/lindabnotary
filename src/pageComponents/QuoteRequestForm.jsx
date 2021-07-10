@@ -1,4 +1,4 @@
-import React, { Fragment, useMemo } from 'react';
+import React, { Fragment } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   Box,
@@ -24,7 +24,7 @@ import {
   faHeadSideCough,
   faSkullCrossbones,
 } from '@fortawesome/free-solid-svg-icons';
-import { fetchWrapper } from '../lib/fetchWrapper';
+import { formPost } from '../util/formPost';
 import FadeScaleXWrapper from '../components/FadeScaleXWrapper';
 import ErrorMsgAlert from '../pageComponents/ErrorMsgAlert';
 import ErrOrOkAlert from '../pageComponents/ErrOrOkAlert';
@@ -32,6 +32,14 @@ import {
   modal40of80ResPoints,
   modalTextareaResPoints,
 } from 'styles/breakpointValues';
+
+let endpoint = '';
+
+if (process.env.NODE_ENV === 'development') {
+  endpoint = process.env.REACT_APP_FORMPOST_SANDBOX_URL;
+} else {
+  endpoint = process.env.REACT_APP_FORMPOST_URL;
+}
 
 const nameRegEx = '^[aA-zZs-]+$';
 const phoneRegEx = `^[0-9s -]+$`;
@@ -45,28 +53,28 @@ const initialValues = {
 };
 
 const validationSchema = Yup.object({
-  // firstName: Yup.string()
-  //   .matches(nameRegEx, `Must be only letters or hyphen`)
-  //   .max(18, `Must be 18 letters or less`)
-  //   .required(`First name is required`),
-  // lastName: Yup.string()
-  //   .matches(nameRegEx, `Must be only letters or hyphen`)
-  //   .max(24, `Must be 24 letters or less`)
-  //   .required(`Last name is required`),
-  // tel: Yup.string()
-  //   .matches(phoneRegEx, `That doesn't go in phone number...`)
-  //   .min(12, `12 characters, please`)
-  //   .max(12, `12 characters, please`)
-  //   .required(`Phone number is required`),
-  // email: Yup.string()
-  //   .email(`That's not an email address!`)
-  //   .required(`Email address is required`),
-  // message: Yup.string()
-  //   .min(50, `Please include more details...`)
-  //   .required(`Short message is required`),
+  firstName: Yup.string()
+    .matches(nameRegEx, `Must be only letters or hyphen`)
+    .max(18, `Must be 18 letters or less`)
+    .required(`First name is required`),
+  lastName: Yup.string()
+    .matches(nameRegEx, `Must be only letters or hyphen`)
+    .max(24, `Must be 24 letters or less`)
+    .required(`Last name is required`),
+  tel: Yup.string()
+    .matches(phoneRegEx, `That doesn't go in phone number...`)
+    .min(12, `12 characters, please`)
+    .max(12, `12 characters, please`)
+    .required(`Phone number is required`),
+  email: Yup.string()
+    .email(`That's not an email address!`)
+    .required(`Email address is required`),
+  message: Yup.string()
+    .min(50, `Please include more details...`)
+    .required(`Short message is required`),
 });
 
-const FormMailer = props => {
+const FormMailer = ({ onClose }) => {
   /* eslint-disable no-unused-vars */
   let location = useLocation();
 
@@ -74,7 +82,14 @@ const FormMailer = props => {
     e.preventDefault();
   };
 
-  // useMemo(() =>
+  const closeModal = () => {
+    setTimeout(() => {
+      alert('Will contact you soon - thanks!');
+      onClose();
+    }, 500);
+  };
+
+  // todo: explore useMemo + withFormik
   return (
     <Fragment>
       <AnimatePresence>
@@ -92,18 +107,21 @@ const FormMailer = props => {
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={(values, actions) => {
-                fetchWrapper
-                  .post('/requestmailer.php', values)
-                  .then(data =>
-                    alert(
-                      `You sent: ${JSON.stringify(
-                        data
-                      )} "... We'll get back to you shortly!  Thanks!`
-                    )
-                  )
-                  .catch(error => alert('Http error: ', error));
+                let formData = new FormData();
+
+                formData.append('form', 'inquiry');
+                for (const value in values) {
+                  formData.append(value, values[value]);
+                }
+
+                /* test values after in formData obj */
+                // for (let property of formData.entries()) {
+                //   console.log('Sending: ', property[0], property[1]);
+                // }
+
+                formPost(endpoint, formData);
                 actions.setSubmitting(false);
-                props.onClose();
+                actions.resetForm();
               }}
             >
               {props => (
@@ -141,7 +159,6 @@ const FormMailer = props => {
                               name="firstName"
                               onBlur={props.handleBlur}
                               onChange={props.handleChange}
-                              // onMouseDown={handleOnMouseDown}
                               placeholder="enter first name here"
                               type="text"
                               value={props.values.firstName}
@@ -195,7 +212,6 @@ const FormMailer = props => {
                               name="lastName"
                               onBlur={props.handleBlur}
                               onChange={props.handleChange}
-                              // onMouseDown={handleOnMouseDown}
                               placeholder="enter last name here"
                               type="text"
                               value={props.values.lastName}
@@ -253,7 +269,6 @@ const FormMailer = props => {
                               name="tel"
                               onBlur={props.handleBlur}
                               onChange={props.handleChange}
-                              // onMouseDown={handleOnMouseDown}
                               placeholder="enter telephone number here"
                               type="text"
                               value={props.values.tel}
@@ -309,7 +324,6 @@ const FormMailer = props => {
                               name="email"
                               onBlur={props.handleBlur}
                               onChange={props.handleChange}
-                              // onMouseDown={handleOnMouseDown}
                               placeholder="enter email address here"
                               type="text"
                               value={props.values.email}
@@ -360,14 +374,11 @@ const FormMailer = props => {
                           name="message"
                           onBlur={props.handleBlur}
                           onChange={props.handleChange}
-                          // onMouseDown={handleOnMouseDown}
                           placeholder="Briefly explain what you need help with"
                           rows="8"
                           type="text"
                           value={props.values.message}
                           minW={modalTextareaResPoints}
-                          // w={modalResPoints}
-                          // w="50vw"
                         />
                         <FormHelperText align="center">
                           e.g. "Can you travel to Snoqualmie Pass? How much it
@@ -403,6 +414,7 @@ const FormMailer = props => {
                       disabled={!(props.isValid && props.dirty)}
                       name="submit"
                       onMouseDown={handleOnMouseDown}
+                      onClick={closeModal}
                       type="submit"
                       m={4}
                       minW="5rem"
@@ -429,10 +441,7 @@ const FormMailer = props => {
           </VStack>
         </FadeScaleXWrapper>
       </AnimatePresence>
-      {/* </Box>
-    </Box> */}
     </Fragment>
-    // )
   );
 };
 

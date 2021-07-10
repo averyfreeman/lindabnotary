@@ -13,11 +13,18 @@ import {
 import LoadingAnim from '../components/LoadingAnim';
 import { ColorModeSwitcher } from '../components/ColorModeSwitcher';
 import PageChangeAnimator from '../components/PageChangeAnimator';
+import OfferAlertModal from '../pageComponents/OfferAlertModal';
 import Footer from '../pageElements/Footer';
 
-const Loading = () => {
+const Loading = props => {
+  const { offerModalDisplayed, setOfferModalDisplayed } = props;
   return (
     <ChakraProvider theme={theme}>
+      <OfferAlertModal
+        offerModalDisplayed={offerModalDisplayed}
+        setOfferModalDisplayed={setOfferModalDisplayed}
+      />
+
       <PageChangeAnimator>
         <Box textAlign="center" fontSize="xl">
           <Grid minH="100vh" p={3}>

@@ -1,7 +1,7 @@
 {
   "name": "lindabnotary.com",
   "homepage": "http://localhost",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "private": false,
   "dependencies": {
     "@chakra-ui/icons": "^1.0.13",
@@ -17,10 +17,10 @@
     "formik": "^2.2.9",
     "framer-motion": "^4.1.17",
     "history": "^4.10.1",
-    "polished": "^4.1.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-ga": "^3.3.0",
+    "react-gcaptcha": "^4.3.0",
     "react-hook-google-maps": "0.0.3",
     "react-loading-icons": "^1.0.4",
     "react-router-dom": "^5.2.0",

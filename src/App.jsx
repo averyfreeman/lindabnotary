@@ -1,5 +1,5 @@
 import './styles/global.css';
-import React, { Fragment, lazy, Suspense, useMemo } from 'react';
+import React, { Fragment, lazy, Suspense, useMemo, useState } from 'react';
 import { Box, ChakraProvider, ColorModeScript, theme } from '@chakra-ui/react';
 import { Route, Redirect, Switch, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
@@ -10,7 +10,6 @@ import MenuHeader from './pageComponents/MenuHeader';
 import Home from './pages/Home';
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
-const Loading = lazy(() => import('./pages/Loading'));
 const Qualifications = lazy(() => import('./pages/Qualifications'));
 const Region = lazy(() => import('./pages/Region'));
 
@@ -70,18 +69,12 @@ const DevelopmentPortion = () => {
 const FormMailer = lazy(() => import('./pages/FormMailer'));
 const FormScreen = lazy(() => import('./pages/FormScreen'));
 const FormikTest = lazy(() => import('./pages/FormikTest'));
-// import About from './pages/About';
-// import Contact from './pages/Contact';
-// import Loading from './pages/Loading';
-// import Qualifications from './pages/Qualifications';
-// import Region from './pages/Region';
-// import FormMailer from './pages/FormMailer';
-// import FormScreen from './pages/FormScreen';
-// import FormikTest from './pages/FormikTest';
 
 const App = () => {
+  const [offerModalDisplayed, setOfferModalDisplayed] = useState(false);
   /* eslint-disable no-unused-vars */
   let location = useLocation();
+
   return useMemo(
     () => (
       <Fragment>
@@ -119,7 +112,15 @@ const App = () => {
 
             <AnimatePresence exitBeforeEnter initial={false}>
               <Switch location={location} key={location.pathname}>
-                <Route path="/home" children={<Home />} />
+                <Route
+                  path="/home"
+                  children={
+                    <Home
+                      offerModalDisplayed={offerModalDisplayed}
+                      setOfferModalDisplayed={setOfferModalDisplayed}
+                    />
+                  }
+                />
                 <Route
                   path="/about"
                   children={
@@ -132,7 +133,10 @@ const App = () => {
                         />
                       }
                     >
-                      <About />
+                      <About
+                        offerModalDisplayed={offerModalDisplayed}
+                        setOfferModalDisplayed={setOfferModalDisplayed}
+                      />
                     </Suspense>
                   }
                 />
@@ -148,7 +152,10 @@ const App = () => {
                         />
                       }
                     >
-                      <Region />
+                      <Region
+                        offerModalDisplayed={offerModalDisplayed}
+                        setOfferModalDisplayed={setOfferModalDisplayed}
+                      />
                     </Suspense>
                   }
                 />
@@ -164,7 +171,10 @@ const App = () => {
                         />
                       }
                     >
-                      <Qualifications />
+                      <Qualifications
+                        offerModalDisplayed={offerModalDisplayed}
+                        setOfferModalDisplayed={setOfferModalDisplayed}
+                      />
                     </Suspense>
                   }
                 />
@@ -180,23 +190,10 @@ const App = () => {
                         />
                       }
                     >
-                      <Contact />
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/loading"
-                  children={
-                    <Suspense
-                      fallback={
-                        <LoadingAnim
-                          stroke="lightcoral"
-                          strokeWidth="1px"
-                          fill="indianred"
-                        />
-                      }
-                    >
-                      <Loading />
+                      <Contact
+                        offerModalDisplayed={offerModalDisplayed}
+                        setOfferModalDisplayed={setOfferModalDisplayed}
+                      />
                     </Suspense>
                   }
                 />
@@ -210,7 +207,7 @@ const App = () => {
         </ChakraProvider>
       </Fragment>
     ),
-    [location]
+    [location, offerModalDisplayed, setOfferModalDisplayed]
   );
 };
 

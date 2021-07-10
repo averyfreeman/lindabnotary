@@ -9,42 +9,51 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
-import FadeScaleYWrapper from '../components/FadeScaleYWrapper';
 
 const MultiModal = ({
+  animKey,
   children,
   footer,
   header,
+  isCentered,
   isOpen,
+  motionPreset,
   onClose,
   onOpen,
+  preserveScrollBarGap,
+  ref,
   ...rest
 }) => {
   return (
     <Fragment>
-      <FadeScaleYWrapper duration={1} key="modal-animKey-0">
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
+      <Modal
+        isOpen={isOpen}
+        isCentered={isCentered}
+        motionPreset={motionPreset}
+        onClose={onClose}
+        preserveScrollBarGap={preserveScrollBarGap}
+        ref={ref}
+      >
+        <ModalOverlay />
 
-          <ModalContent
-            borderRadius="lg"
-            minW={{
-              base: '100vw',
-              sm: '80vw',
-              md: '80vw',
-              lg: '75vw',
-              xl: '60vw',
-              '2xl': '55vw',
-            }}
-            {...rest}
-          >
-            <ModalCloseButton />
-            <ModalHeader align="center">{header}</ModalHeader>
-            <ModalBody>{cloneElement(children, { onClose })}</ModalBody>
-            <ModalFooter>{footer}</ModalFooter>
-          </ModalContent>
-        </Modal>
-      </FadeScaleYWrapper>
+        <ModalContent
+          borderRadius="lg"
+          minW={{
+            base: '100vw',
+            sm: '80vw',
+            md: '80vw',
+            lg: '75vw',
+            xl: '60vw',
+            '2xl': '55vw',
+          }}
+          {...rest}
+        >
+          <ModalCloseButton />
+          <ModalHeader align="center">{header}</ModalHeader>
+          <ModalBody>{children}</ModalBody>
+          <ModalFooter>{footer}</ModalFooter>
+        </ModalContent>
+      </Modal>
     </Fragment>
   );
 };
