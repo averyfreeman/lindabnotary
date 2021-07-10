@@ -1,12 +1,14 @@
-### Linda B the Notary
+# Linda B the Notary
 
-- lindabnotary.com
+---
+
+see it @ https://lindabnotary.com
 
 This is a business profile site I created for a client who is a (wait for it) notary
 
 It's a simple obligatory "about me" type site, but I crammed in a decent number of features:
 
-- Responsive layout (Chakra UI + @emotion CSS-in-JS) - most pages / components have at 5 different sizes
+- Responsive layout (Chakra UI + @emotion CSS-in-JS) - most pages / components have 5 different sizes
 - Lightly animated navigation (React Router v5 + Framer Motion)
 - Dark mode (user selected, but system detection can be easily implemented)
 - Email form using Formik
@@ -39,4 +41,4 @@ On the horizon (in order of importance):
 - Site analytics (Google)
 - Unit tests
 - Snowpack version (have been developing in parallel - reason for relative paths)
-- Storybook for components I'm most proud of
+- Storybook for some components
